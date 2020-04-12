@@ -3,6 +3,11 @@ import Task from '../components/task';
 
 import tasksService from "../service/taskService";
 let tasksServiceClass = new tasksService();
+
+function create(){
+  document.getElementById("createForm")
+}
+
 function Tasks (){
     return (
         tasksServiceClass.get().map(t => {
@@ -12,6 +17,7 @@ function Tasks (){
                 dueDate = {t.dueDate}
                 done = {t.done}
                 info = {t.id}
+                create = {create}
             />
         })
     )
@@ -21,7 +27,10 @@ function TodoList () {
     return (
         <div>
             Add new task:
-            <Task />
+            <form id="createForm">
+              <Task 
+              name={} />
+            </form>
             <hr />
             <Tasks />
         </div>
