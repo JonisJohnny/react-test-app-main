@@ -4,8 +4,9 @@ import Task from '../components/task';
 import tasksService from "../service/taskService";
 let tasksServiceClass = new tasksService();
 
-function create(){
-  document.getElementById("createForm")
+function create(e){
+  alert("test");
+  console.log(e.target);
 }
 
 function Tasks (){
@@ -27,10 +28,7 @@ function TodoList () {
     return (
         <div>
             Add new task:
-            <form id="createForm">
-              <Task 
-              name={} />
-            </form>
+              <Task />
             <hr />
             <Tasks />
         </div>

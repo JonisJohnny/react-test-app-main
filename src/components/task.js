@@ -1,34 +1,37 @@
 import React from 'react';
+import { observable, decorate, action } from "mobx"
 
 class Task extends React.Component {
-
   constructor(props) {
-    super(props);
-    this.state = {value: ''};
+  super(props);
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+done = this.props.done
+name = this.props.name
+dueDate = this.props.dueDate
+id = this.props.id
   handleChange(event) {
     this.setState({value: event.target.value});
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
+    
     event.preventDefault();
+    console.log(this.props);
   }
+
   render(){
     return (
         <div>
-          <form>
-                <input type="checkbox" checked={this.props.done} />
-                <input type="text" value={this.props.name} placeholder="Add what todo..." />
-                DueDate:<input type="date" value={props.dueDate} />
-                <input type="hidden" value={props.id} />
-                {props.id ?
-                <button onClick={props.info}>Info</button>
-                : <button onClick={props.create}>Create</button>
+          <form onSubmit={this.handleSubmit}>
+                <input type="checkbox" checked={this.done} />
+                <input type="text" value={this.name} placeholder="Add what todo..." />
+                DueDate:<input type="date" value={this.dueDate} />
+                <input type="hidden" value={this.id} />
+                {this.id ?
+                <button onClick={this.props.create}>Info</button>
+                : <button onClick={this.props.create}>Create</button>
                 }
           </form>
         </div>
@@ -36,3 +39,11 @@ class Task extends React.Component {
   }
 }
 export default Task;
+
+decorate(Task, {
+  create: observable,
+    done: observable,
+    name: observable,
+    dueDate: observable,
+    id: observable,
+})
